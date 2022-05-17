@@ -1,0 +1,120 @@
+Welcome to the CurbFlow interview mini-project.
+
+Basically, it's about adding some features to an API.
+
+Feel free to take as long as you'd like, but we've tried to make it
+small so you can complete it in <4 hours even if you haven't fully
+used these tools/libraries: While we'd love to do a much larger project
+that shows off more skills, we wanted to be sure to
+respect your time!  This checks that you can do some basic modifications
+to a backend web project.
+
+This isn't a timed test--if you want to stop and come back to it, feel
+free (ie., we don't want you to feel pressured but also don't want to make
+it so long as to waste your time.)
+
+The Idea
+----------
+We've got the backend here of a micro-LMS (learning management system).
+Yes, we know CurbFlow doesn't build learning management systems, but it's
+a nice sample we had around.  It has Users, Courses, and
+Videos.  We want you to update this micro-LMS to do a bit more than it
+does today.
+
+Right now, each User can only participate in one Course.  You're
+going to add multi-course support to the micro-LMS, updating the API
+and migrating the database.
+
+Setup
+-----------
+1. Unpack the zipfile
+
+OR
+
+1. Fork the project on GitLab
+2. git clone the project
+
+3. Make sure you have the necessary tools installed:
+
+Python 3
+SQLite
+curl (for testing it out--or use Requests in Python)
+
+To install:
+
+OS X/Homebrew
+
+brew install python sqlite curl
+
+4. Create a virtualenv and activate it
+$ python3 -m venv venv
+
+bash/zsh:
+$ . venv/bin/activate
+Some other shells:
+% source venv/bin/activate
+
+5. Install requirements
+$ venv/bin/python3 -m pip install -r requirements.txt
+
+6. Setup your environment
+$ export FLASK_APP=main.py
+$ export FLASK_DEBUG=1
+$ export FLASK_ENV=development
+
+6. Create/setup the DB
+$ venv/bin/python3 -m pip -r requirements.txt
+
+7. $ venv/bin/flask create-database
+to create the DB
+and
+$ venv/bin/flask add-model-data
+to fill it
+
+8. Run the web server
+$ venv/bin/flask run
+
+9. Try it out
+
+$ curl http://localhost:5000/user/1
+$ curl http://localhost:5000/users -d "email=dan.gould@curbflow.com" -X POST
+
+or
+$ venv/bin/python3
+>>> from requests import get, put, post, delete
+>>> get('http://localhost:5000/user/1').json()
+>>> post('http://localhost:5000/users', data={'email': 'dan.gould@curbflow.com'}).json()
+
+
+
+Your Project
+-----------
+The micro-LMS currently has three entities:
+* Users
+* Courses
+* Videos
+
+Each user can be assigned to a course.  We want to let users be assigned
+to multiple courses.  So, your project is to:
+
+* Add support to multiple courses
+* Add API support for managing those courses -- use your judgement for what
+     should be in the API (but GETting /user/:userid should include a list of
+     courses the user has assigned)
+* Migrate the schema
+* Migrate the existing users in the database (can just bbe a set of SQL commands)
+
+
+Libraries
+-----------
+This project is using the following libraries.  But feel free to add/update
+as you wish:
+* Python 3
+* Flask -- our web framework
+* Flask-RESTful -- nice organization of RESTful routes
+* Marshmallow -- nice JSON serialization/deserializating
+    (plus Flask-Markmallow & Marshmallow-SQLAlchemy to handle integration)
+* SQLAlchemy -- ORM
+* Flask-SQLAlchemy -- Manages DB sessions in Flask web requests
+* Alembic -- Migrations for SQLAlchemy
+
